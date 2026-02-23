@@ -108,7 +108,7 @@
     if (!media) { showToast('Sin archivo de demostración configurado', 'error'); return; }
     const src = 'assets/images/' + media;
     const $content = $('<div>');
-    $content.append($('<p>').addClass('subtle').text(ejercicio));
+    $content.append($('<p>').addClass('subtle demo-title').text(ejercicio));
     // Detección simple por extensión
     const isVideo = /\.(mp4|webm|ogg)$/i.test(media);
     if (isVideo) {
@@ -116,7 +116,7 @@
       $video.append($('<source>').attr('src', src));
       $content.append($video);
     } else {
-      const $img = $('<img>').addClass('demo-media').attr('src', src).css({ borderRadius: '10px' });
+      const $img = $('<img>').addClass('demo-media').attr('src', src).css({ borderRadius: '10px', width: '100%', objectFit: 'cover' });
       $content.append($img);
     }
     openModal('Demostración', $content);

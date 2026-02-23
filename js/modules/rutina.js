@@ -255,14 +255,14 @@
       if (!media) { window.showToast && showToast('Sin archivo de demostración configurado', 'error'); return; }
       var src = 'assets/images/' + media;
       var $content = $('<div>');
-      $content.append($('<p>').addClass('subtle').text(ejercicio));
+      $content.append($('<p>').addClass('subtle demo-title').text(ejercicio));
       var isVideo = /(\.mp4|\.webm|\.ogg)$/i.test(media);
       if (isVideo) {
         var $video = $('<video>').addClass('demo-media').attr({ controls: true, playsinline: true, autoplay: true, loop: true }).css({ borderRadius: '10px' });
         $video.append($('<source>').attr('src', src));
         $content.append($video);
       } else {
-        var $img = $('<img>').addClass('demo-media').attr('src', src).css({ borderRadius: '10px' });
+        var $img = $('<img>').addClass('demo-media').attr('src', src).css({ borderRadius: '10px', width: '100%', objectFit: 'cover' });
         $content.append($img);
       }
       window.openModal && openModal('Demostración', $content);

@@ -270,7 +270,6 @@ body.nav-open {
 .modal-content.small {
   max-width: 400px;
   overflow: hidden;
-  /* Responsive para móvil */
 }
 .modal-content.small .modal-header {
   text-align: center;
@@ -330,6 +329,9 @@ body.nav-open {
 }
 .modal-content.small .modal-actions .menu-action:active {
   transform: translateY(0);
+}
+.modal-content.small {
+  /* Responsive para móvil */
 }
 @media (max-width: 767px) {
   .modal-content.small {
@@ -1028,7 +1030,7 @@ select:focus {
 .chip {
   background: #eef3ff;
   color: #0056b3;
-  border: 1px solid #439dff;
+  border: 1px solid rgb(66.8, 157.2201117318, 255);
   padding: 4px 8px;
   border-radius: 999px;
   font-size: 12px;
@@ -1038,6 +1040,10 @@ select:focus {
 /* Utilidades */
 .subtle {
   color: #5a6268;
+}
+
+.demo-title {
+  text-align: center;
 }
 
 .info {
