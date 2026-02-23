@@ -1,7 +1,11 @@
 .env
 vendor/
 .vscode/
+.cursor/
 
 data.json
 chat_history.json
 progresos.json
+data_old.json
+
+assets/images/

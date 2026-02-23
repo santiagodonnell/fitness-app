@@ -248,7 +248,7 @@ select:focus {
 .tabla-progresion td {
   border-bottom: 1px solid $border-color;
   padding: 10px 12px;
-  text-align: left;
+  text-align: center;
 }
 
 /* Anchos de columnas */
@@ -627,20 +627,25 @@ select:focus {
     font-size: 13px;
   }
 
-  /* Mejoras para tablas en móvil */
+  /* Tablas en móvil: scroll horizontal para mostrar todas las columnas */
   .table-wrapper {
     border-radius: 8px;
     border: 1px solid $border-color;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .tabla-ejercicios,
   .tabla-progresion {
-    min-width: 320px;
+    min-width: 650px;
+    width: max-content;
+    table-layout: auto;
     font-size: 13px;
 
     th,
     td {
       padding: 8px 10px;
+      white-space: nowrap;
     }
   }
 
@@ -756,7 +761,7 @@ select:focus {
 
   .tabla-ejercicios,
   .tabla-progresion {
-    min-width: 280px;
+    min-width: 600px;
     font-size: 12px;
 
     th,

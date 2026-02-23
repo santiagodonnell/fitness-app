@@ -3,5 +3,19 @@
     min-height: 1px;
 }
 
+/* Chart wrapper - scroll horizontal en móvil */
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 260px;
+    margin-top: 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    @media (max-width: 767px) {
+        min-width: 400px;
+        min-height: 240px;
+    }
+}
+
 /* Media queries */
-/* (agregar estilos responsivos específicos si aplica) */

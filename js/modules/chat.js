@@ -91,7 +91,8 @@
         var $txtWrap = $('<div>');
         var $preview = $('<div>').text(preview);
         var created = it.created_at || ''; var ts = '';
-        try { ts = created ? (new Date(created)).toLocaleString() : ''; } catch (e) { ts = created.replace('T',' ').replace('Z',''); }
+        if (created && window.formatDateDDMMYYYY) { ts = window.formatDateDDMMYYYY(created); }
+        else { try { ts = created ? (new Date(created)).toLocaleString() : ''; } catch (e) { ts = created ? created.replace('T',' ').replace('Z','') : ''; } }
         var $date = $('<div>').addClass('history-date').text(ts);
         $txtWrap.append($preview, $date);
         var $trash = $('<button>').addClass('trash-btn').attr('type','button').html('<span class="material-symbols-outlined">delete</span>');

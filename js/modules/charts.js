@@ -1,6 +1,8 @@
 (function (window, $) {
   'use strict';
 
+  function formatDate(str) { return (window.formatDateDDMMYYYY || function(s){ return s || ''; })(str); }
+
   function sortByDate(items) {
     var arr = Array.isArray(items) ? items.slice() : [];
     arr.sort(function(a,b){ return a.fecha > b.fecha ? 1 : -1; });
@@ -54,7 +56,7 @@
 
     apiGetJSON(API.progreso, { dia: dia, ejercicio: ejercicio }).done(function (res) {
       var items = sortByDate((res && res.items) ? res.items : []);
-      var labels = items.map(function(it){ return it.fecha; });
+      var labels = items.map(function(it){ return formatDate(it.fecha); });
       var maxSets = 0;
       items.forEach(function(it){ if (Array.isArray(it.series)) maxSets = Math.max(maxSets, it.series.length); else if (typeof it.peso !== 'undefined') maxSets = Math.max(maxSets, 1); });
       var datasets = buildDatasets(items, maxSets, 'peso');
@@ -90,7 +92,7 @@
       if (!items.length) { var colspan = 1 + maxSets + 4; $tbody.append('<tr><td colspan="' + colspan + '">Sin registros</td></tr>'); return; }
       items.forEach(function(it){
         var $tr = $('<tr>');
-        $tr.append($('<td>').text(it.fecha || ''));
+        $tr.append($('<td>').text(formatDate(it.fecha)));
         var rpeVals = []; var descansoVals = [];
         for (var s = 1; s <= maxSets; s++) {
           var peso = '';

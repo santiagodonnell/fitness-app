@@ -848,7 +848,7 @@ select:focus {
 .tabla-progresion td {
   border-bottom: 1px solid #e0e0e0;
   padding: 10px 12px;
-  text-align: left;
+  text-align: center;
 }
 
 /* Anchos de columnas */
@@ -1183,14 +1183,18 @@ select:focus {
   .series-reps {
     font-size: 13px;
   }
-  /* Mejoras para tablas en móvil */
+  /* Tablas en móvil: scroll horizontal para mostrar todas las columnas */
   .table-wrapper {
     border-radius: 8px;
     border: 1px solid #e0e0e0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .tabla-ejercicios,
   .tabla-progresion {
-    min-width: 320px;
+    min-width: 650px;
+    width: max-content;
+    table-layout: auto;
     font-size: 13px;
   }
   .tabla-ejercicios th,
@@ -1198,6 +1202,7 @@ select:focus {
   .tabla-progresion th,
   .tabla-progresion td {
     padding: 8px 10px;
+    white-space: nowrap;
   }
   /* Ajustes para formularios en móvil */
   .form-grid .form-row {
@@ -1286,7 +1291,7 @@ select:focus {
   }
   .tabla-ejercicios,
   .tabla-progresion {
-    min-width: 280px;
+    min-width: 600px;
     font-size: 12px;
   }
   .tabla-ejercicios th,
@@ -1327,6 +1332,22 @@ select:focus {
 /* Progresión */
 #sec-progresion {
   min-height: 1px;
+}
+
+/* Chart wrapper - scroll horizontal en móvil */
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 260px;
+  margin-top: 12px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 767px) {
+  .chart-wrapper {
+    min-width: 400px;
+    min-height: 240px;
+  }
 }
 
 /* Media queries */
