@@ -1,0 +1,231 @@
+/* Asistente */
+
+.assistant-grid {
+    display: grid;
+    grid-template-columns: 4fr 6fr;
+    gap: 16px;
+}
+
+@media (max-width: 920px) {
+    .assistant-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chat {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    /* header, log, form */
+    gap: 12px;
+    min-height: 360px;
+    background: #fff;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+}
+
+.chat-log {
+    max-height: none;
+    overflow: auto;
+}
+
+.chat-history {
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 20px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 0 5px 0;
+    border-bottom: 1px solid $border-color;
+    font-weight: 600;
+}
+
+.panel-header .btn-clear-history {
+    padding: 6px 10px;
+}
+
+.muted {
+    color: $secondary-txt-color;
+    font-weight: 500;
+}
+
+.trash-btn {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 6px;
+}
+
+.trash-btn:hover {
+    background: #fff0f0;
+}
+
+.trash-btn .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    font-size: 18px;
+    line-height: 1;
+    color: $danger-color;
+    display: block;
+}
+
+.history-list {
+    padding: 10px 12px;
+    overflow: auto;
+    max-height: 100%;
+    color: $primary-txt-color;
+}
+
+.history-item {
+    padding: 8px 10px;
+    border: 1px solid $border-color;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.history-item:hover {
+    background: #f7f9fc;
+}
+
+.history-item.is-new {
+    animation: fadeInHistory 300ms ease-in, flashHistory 900ms ease-out;
+}
+
+@keyframes fadeInHistory {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes flashHistory {
+    0% {
+        background-color: rgba(0, 183, 74, 0.5);
+    }
+
+    100% {
+        background-color: transparent;
+    }
+}
+
+.history-date {
+    font-size: 10px;
+    font-style: italic;
+    color: $primary-txt-color;
+    font-weight: 600;
+    margin-top: 4px;
+}
+
+.chat-msg {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.chat-msg.user {
+    justify-content: flex-end;
+}
+
+.chat-bubble {
+    padding: 10px 12px;
+    border-radius: 12px;
+    max-width: 82%;
+    font-size: 14px;
+    color: $primary-txt-color;
+    font-family: inherit;
+    line-height: 160%;
+}
+
+.chat-msg.user .chat-bubble {
+    background: #e8f0ff;
+}
+
+.chat-msg.assistant .chat-bubble {
+    background: #f5f5f5;
+}
+
+.typing-dots {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.typing-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+    background: $secondary-txt-color;
+    animation: typingBlink 1s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2) {
+    animation-delay: .15s;
+}
+
+.typing-dots span:nth-child(3) {
+    animation-delay: .30s;
+}
+
+@keyframes typingBlink {
+
+    0%,
+    80%,
+    100% {
+        opacity: .2;
+        transform: translateY(0);
+    }
+
+    40% {
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+}
+
+.chat-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 8px;
+}
+
+.chat-form .btn-primary {
+    width: 100%;
+}
+
+.chat-form textarea#chat-input {
+    background-color: transparent;
+    resize: none;
+    overflow: auto;
+    min-height: 42px;
+    /* ~1 línea */
+    max-height: calc(1.2em * 6 + 16px);
+    /* 6 líneas aprox + padding */
+    line-height: 1.2em;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    padding: 8px 10px;
+    min-width: 0;
+    width: 100%;
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+    color: $primary-txt-color;
+    font-size: 14px;
+    font-family: inherit;
+}

@@ -1,0 +1,76 @@
+{
+  "rutina": {
+    "dias": {
+      "Lunes": {
+        "grupos_musculares": ["Pecho", "Bíceps"],
+        "ejercicios": [
+          {
+            "media_url": "0001.gif",
+            "nombre": "Press banca plano barra",
+            "nombre_en": "Flat Barbell Bench Press",
+            "series": 4,
+            "reps": "8-10"
+          },
+          {
+            "media_url": "",
+            "nombre": "Curl bíceps barra Z",
+            "nombre_en": "EZ Bar Bicep Curls",
+            "series": 4,
+            "reps": "10-12"
+          }
+        ]
+      },
+      "Martes": {
+        "grupos_musculares": ["Piernas"],
+        "ejercicios": [
+          {
+            "media_url": "",
+            "nombre": "Sentadilla libre",
+            "nombre_en": "Free Squats",
+            "series": 4,
+            "reps": "6-8"
+          }
+        ]
+      }
+    }
+  },
+  "cardio": {
+    "Lunes": "HIIT (12 sprints de 30s + 1min trote)",
+    "Martes": "Cardio moderado 40-45min",
+    "Miércoles": "Descanso",
+    "Jueves": "HIIT (12 sprints de 30s + 1min trote)",
+    "Viernes": "Cardio moderado 40-45min",
+    "Sábado": "Descanso",
+    "Domingo": "Descanso"
+  },
+  "progresion": {
+    "fase1": {
+      "duracion": "Semanas 1-4",
+      "peso": "70% RM",
+      "series_reps": "Compuestos 4x8-10, accesorios 3x12-15",
+      "incremento": "2.5% semanal"
+    },
+    "fase2": {
+      "duracion": "Semanas 5-8",
+      "peso": "75-80% RM",
+      "series_reps": "Compuestos 4x6-8, accesorios 3-4x10-12",
+      "incremento": "2.5-5% cada 2 semanas"
+    },
+    "fase3": {
+      "duracion": "Semanas 9-12",
+      "peso": "65-75% RM",
+      "series_reps": "Compuestos 4-5x8-12, accesorios 3-4x12-15",
+      "descanso": "45-60s entre series",
+      "semana12": "Descarga, bajar peso 20%"
+    }
+  },
+  "notas": {
+    "registro": "Llevar anotación de peso y repeticiones cada día",
+    "alimentacion": {
+      "proteina": "2g por kg de peso (~166g/día)",
+      "carbohidratos": "Moderados, concentrados antes/después del gym",
+      "grasas": "20-25% de calorías diarias",
+      "deficit": "-500 kcal/día aprox"
+    }
+  }
+}

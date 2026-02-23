@@ -1,0 +1,23 @@
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS, PUT, DELETE"
+    Header set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+</IfModule>
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# 4 niveles
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?module=$1&subRoute=$2&pagelvl3=$3&pagelvl4=$4 [QSA,L]
+
+# 3 niveles
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?module=$1&subRoute=$2&pagelvl3=$3 [QSA,L]
+
+# 2 niveles
+RewriteRule ^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)/?$ index.php?module=$1&subRoute=$2 [QSA,L]
+
+# 1 nivel
+RewriteRule ^([a-zA-Z0-9_-]+)/?$ index.php?module=$1 [QSA,L]

@@ -1,0 +1,58 @@
+/* Header */
+
+/* Layout */
+.app-header {
+  padding: 20px 24px;
+  background: linear-gradient(90deg, $primary-color, $light-primary-color);
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    text-align: center;
+  }
+}
+
+/* Botón de menú móvil */
+.menu-toggle {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+  display: none;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .material-symbols-outlined {
+    font-size: 24px;
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+}
+
+/* States / Variants */
+/* (agregar variantes del header aquí si fueran necesarias) */
+
+/* Utilities */
+/* (no se requieren utilidades específicas para header por ahora) */
+
+/* Media queries */
+@media (max-width: 767px) {
+  .menu-toggle {
+    display: block;
+  }
+}

@@ -1,0 +1,7 @@
+.env
+vendor/
+.vscode/
+
+data.json
+chat_history.json
+progresos.json
