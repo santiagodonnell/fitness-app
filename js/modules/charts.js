@@ -3,9 +3,10 @@
 
   function formatDate(str) { return (window.formatDateDDMMYYYY || function(s){ return s || ''; })(str); }
 
-  function sortByDate(items) {
+  function sortByDate(items, desc) {
     var arr = Array.isArray(items) ? items.slice() : [];
     arr.sort(function(a,b){ return a.fecha > b.fecha ? 1 : -1; });
+    if (desc) arr.reverse();
     return arr;
   }
 
@@ -71,25 +72,58 @@
     return $wrap;
   }
 
+  function buildSeriesSummary(it, maxSets) {
+    var parts = [];
+    for (var s = 1; s <= maxSets; s++) {
+      var peso = '';
+      if (Array.isArray(it.series)) {
+        var found = it.series.find(function(x){ return (x.n || 0) === s; }) || it.series[s-1];
+        if (found && typeof found.peso !== 'undefined') { peso = found.peso + (found.reps != null ? '×' + found.reps : ''); }
+      } else if (typeof it.peso !== 'undefined' && s === 1) { peso = it.peso + (it.reps != null ? '×' + it.reps : ''); }
+      if (peso) parts.push(peso + ' kg');
+    }
+    return parts.join(' · ');
+  }
+
+  function buildSeriesRows(it, maxSets) {
+    var rows = [];
+    for (var s = 1; s <= maxSets; s++) {
+      var txt = '';
+      if (Array.isArray(it.series)) {
+        var found = it.series.find(function(x){ return (x.n || 0) === s; }) || it.series[s-1];
+        if (found && typeof found.peso !== 'undefined') { txt = found.peso + ' kg × ' + (found.reps != null ? found.reps : '—') + ' reps'; }
+      } else if (typeof it.peso !== 'undefined' && s === 1) { txt = it.peso + ' kg × ' + (it.reps != null ? it.reps : '—') + ' reps'; }
+      if (txt) rows.push({ set: s, text: txt });
+    }
+    return rows;
+  }
+
   function buildTablaContent(dia, ejercicio) {
-    var $wrap = $('<div>');
+    var $wrap = $('<div>').addClass('progreso-content');
     $wrap.append($('<p>').addClass('subtle').text(dia + ' · ' + ejercicio));
-    var $tw = $('<div>').addClass('table-wrapper');
+    var $tw = $('<div>').addClass('table-wrapper progreso-table');
     var $table = $('<table>').addClass('tabla-progresion');
     $table.append('<thead><tr id="thead-row"><th>Fecha</th></tr></thead>');
     var $tbody = $('<tbody>');
     $table.append($tbody);
     $tw.append($table);
+    var $cardsWrap = $('<div>').addClass('progreso-cards');
     $wrap.append($tw);
+    $wrap.append($cardsWrap);
 
     apiGetJSON(API.progreso, { dia: dia, ejercicio: ejercicio }).done(function (res) {
-      var items = sortByDate((res && res.items) ? res.items : []);
+      var items = sortByDate((res && res.items) ? res.items : [], true);
       var maxSets = 0;
       items.forEach(function(it){ if (Array.isArray(it.series)) maxSets = Math.max(maxSets, it.series.length); else if (typeof it.peso !== 'undefined') maxSets = Math.max(maxSets, 1); });
       var $theadRow = $table.find('#thead-row');
       for (var s = 1; s <= maxSets; s++) { $theadRow.append('<th>Set ' + s + ' (kg)</th>'); }
       $theadRow.append('<th>RPE</th><th>Descanso</th><th>Acciones</th><th>Notas</th>');
-      if (!items.length) { var colspan = 1 + maxSets + 4; $tbody.append('<tr><td colspan="' + colspan + '">Sin registros</td></tr>'); return; }
+      if (!items.length) {
+        var colspan = 1 + maxSets + 4;
+        $tbody.append('<tr><td colspan="' + colspan + '">Sin registros</td></tr>');
+        $cardsWrap.append($('<p>').addClass('subtle').text('Sin registros'));
+        return;
+      }
       items.forEach(function(it){
         var $tr = $('<tr>');
         $tr.append($('<td>').text(formatDate(it.fecha)));
@@ -115,6 +149,31 @@
         $tr.append($acciones);
         $tr.append($('<td>').text(it.notas || ''));
         $tbody.append($tr);
+
+        var $card = $('<div>').addClass('progreso-card');
+        $card.append($('<header>').addClass('progreso-card-header').text(formatDate(it.fecha)));
+        var $setsBlock = $('<div>').addClass('progreso-card-sets');
+        buildSeriesRows(it, maxSets).forEach(function(r){
+          var $row = $('<div>').addClass('progreso-card-set-row');
+          $row.append($('<span>').addClass('progreso-card-set-label').text('Set ' + r.set));
+          $row.append($('<span>').addClass('progreso-card-set-value').text(r.text));
+          $setsBlock.append($row);
+        });
+        $card.append($setsBlock);
+        var hasMeta = rpeVals.length || descansoVals.length;
+        if (hasMeta) {
+          var $meta = $('<div>').addClass('progreso-card-meta');
+          if (rpeVals.length) $meta.append($('<span>').addClass('progreso-card-meta-item').html('<strong>RPE</strong> ' + rpeVals.join(', ')));
+          if (descansoVals.length) $meta.append($('<span>').addClass('progreso-card-meta-item').html('<strong>Descanso</strong> ' + descansoVals.join(', ')));
+          $card.append($meta);
+        }
+        if (it.notas) $card.append($('<div>').addClass('progreso-card-notas').append($('<span>').addClass('progreso-card-notas-label').text('Notas'), $('<span>').addClass('progreso-card-notas-value').text(it.notas)));
+        var $cardActions = $('<div>').addClass('progreso-card-actions');
+        var $editCopy = $('<button>').addClass('btn btn-secondary btn-edit').attr('type', 'button').attr('aria-label', 'Editar registro del ' + (it.fecha || '')).text('Editar').data('id', it.id);
+        var $delCopy = $('<button>').addClass('btn btn-danger btn-del').attr('type', 'button').attr('aria-label', 'Eliminar registro del ' + (it.fecha || '')).text('Eliminar').data('id', it.id);
+        $cardActions.append($editCopy, $delCopy);
+        $card.append($cardActions);
+        $cardsWrap.append($card);
       });
     }).fail(function(){ window.showToast && showToast('No se pudo cargar el progreso', 'error'); });
 

@@ -292,6 +292,121 @@ select:focus {
   background: #fafafa;
 }
 
+/* Vista cards de progreso (móvil) */
+.progreso-cards {
+  display: none;
+}
+
+.progreso-cards .subtle {
+  text-align: center;
+  padding: 8px 0;
+}
+
+.progreso-card {
+  background: #fff;
+  border: 1px solid $border-color;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.progreso-card-header {
+  display: block;
+  background: #f4f7ff;
+  color: $primary-txt-color;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 16px;
+  margin: 0;
+  border-bottom: 1px solid $border-color;
+}
+
+.progreso-card-sets {
+  padding: 12px 16px;
+}
+
+.progreso-card-set-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.progreso-card-set-label {
+  color: $secondary-txt-color;
+  font-weight: 500;
+  min-width: 50px;
+}
+
+.progreso-card-set-value {
+  color: $primary-txt-color;
+  font-weight: 600;
+}
+
+.progreso-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  padding: 10px 16px;
+  font-size: 12px;
+  color: $secondary-txt-color;
+  background: #fafafa;
+  border-top: 1px solid $border-color;
+
+  .progreso-card-meta-item {
+    strong {
+      color: $primary-txt-color;
+      font-weight: 600;
+      margin-right: 4px;
+    }
+  }
+}
+
+.progreso-card-notas {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px;
+  font-size: 13px;
+  border-top: 1px solid $border-color;
+
+  .progreso-card-notas-label {
+    font-weight: 600;
+    color: $secondary-txt-color;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .progreso-card-notas-value {
+    color: $primary-txt-color;
+    line-height: 1.4;
+  }
+}
+
+.progreso-card-actions {
+  display: flex;
+  gap: 10px;
+  padding: 12px 16px;
+  border-top: 1px solid $border-color;
+  background: #fff;
+
+  .btn {
+    flex: 1;
+  }
+}
+
 /* Tarjetas de días como contenedores grandes */
 .dia {
   background: #fff;
@@ -627,7 +742,16 @@ select:focus {
     font-size: 13px;
   }
 
-  /* Tablas en móvil: scroll horizontal para mostrar todas las columnas */
+  /* Progreso: cards en móvil, tabla oculta */
+  .progreso-content .progreso-table {
+    display: none;
+  }
+
+  .progreso-content .progreso-cards {
+    display: block;
+  }
+
+  /* Tablas en móvil: scroll horizontal (para otros usos) */
   .table-wrapper {
     border-radius: 8px;
     border: 1px solid $border-color;

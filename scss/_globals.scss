@@ -186,6 +186,7 @@ body.nav-open {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
 .modal-content {
@@ -197,6 +198,66 @@ body.nav-open {
   max-height: 90vh;
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.modal-handle {
+  display: none;
+}
+
+/* Bottom sheet en móvil */
+@media (max-width: 767px) {
+  .modal {
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .modal.is-hidden {
+    display: flex;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .modal.is-hidden .modal-backdrop {
+    opacity: 0;
+  }
+
+  .modal.is-hidden .modal-content {
+    transform: translateY(100%);
+  }
+
+  .modal-handle {
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: #ccc;
+    border-radius: 2px;
+    margin: 10px auto 0;
+    flex-shrink: 0;
+  }
+
+  .modal-content {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    height: 90vh;
+    max-height: 90vh;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(0);
+    transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .modal-body {
+    max-height: calc(90vh - 140px);
+    padding: 16px 20px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .modal-header {
+    padding: 12px 20px 14px;
+    flex-shrink: 0;
+  }
 }
 
 

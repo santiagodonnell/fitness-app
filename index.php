@@ -91,6 +91,7 @@ $jsVersion = filemtime('js/app.js');
   <div id="modal" class="modal is-hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="modal-backdrop" data-modal-close></div>
     <div class="modal-content" role="document">
+      <div class="modal-handle" aria-hidden="true"></div>
       <header class="modal-header">
         <h3 id="modal-title">Progreso</h3>
         <button type="button" class="modal-close" aria-label="Cerrar" data-modal-close><span class="material-symbols-outlined">close</span></button>
