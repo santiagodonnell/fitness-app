@@ -1,6 +1,11 @@
 (function (window, $) {
   'use strict';
 
+  // Registrar Service Worker para PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  }
+
   $(function () {
     var $tabs = $('#tabs');
     var $filters = $('#filters-section');
