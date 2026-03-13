@@ -68,9 +68,10 @@ if ($method === 'GET') {
         }
         respond(200, ['ok' => true, 'item' => $found]);
     }
-    if ($dia !== '' && $ejercicio !== '') {
-        $items = array_values(array_filter($items, function ($it) use ($dia, $ejercicio) {
-            return ($it['dia'] ?? '') === $dia && ($it['ejercicio'] ?? '') === $ejercicio;
+    // Filtrar por ejercicio (el historial se muestra aunque el ejercicio haya cambiado de día en la rutina)
+    if ($ejercicio !== '') {
+        $items = array_values(array_filter($items, function ($it) use ($ejercicio) {
+            return ($it['ejercicio'] ?? '') === $ejercicio;
         }));
     }
     respond(200, ['ok' => true, 'items' => $items]);
